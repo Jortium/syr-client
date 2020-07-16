@@ -1,6 +1,6 @@
 .navBar{
-background-color:#ADADAD;
-height: 5vh;
+background-color: #BF9106;
+height: 7vh;
 width: 100%;
 }
 
@@ -18,18 +18,32 @@ width: 100%;
 .navBrandM{
     display: inline-block;
     position: absolute;
-    margin-top: 1vh;
+    margin-top: 1.5vh;
     margin-left: 2vh;
+    font-size: 35px;
 }
 
 .navBrandD{
     display: none;
 }
 
+.squareM{
+    display: inline-block;
+    font-size: 50px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+}
+
+.squareD{
+    display:none;
+}
+
 .navLinkM{
  display: inline-block;
  margin-top:1.5vh;
- margin-right:2vh;
+ margin-right:4vh;
+ font-size: 30px;
 }
 
 .navLinkD{
@@ -37,6 +51,18 @@ width: 100%;
 }
 
 @media (min-width: 769px) {
+
+    .navBar{
+        height: 5vh;
+        }
+
+    .squareM{
+        display: none;
+    }
+
+    .squareD{
+        display: inline-block;
+    }
 
     .navBrandM{
         display: none;

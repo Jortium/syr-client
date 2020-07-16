@@ -10,9 +10,6 @@ export default class Board extends Component {
         <p className='post'>
         Posts go here
         </p>
-        <div className="buttonBox">
-        <i className="far fa-plus-square"></i>
-        </div>
         </div>
 </div>
         )
