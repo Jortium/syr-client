@@ -1,0 +1,41 @@
+.move{
+    display: flex;
+    justify-content: center;
+}
+
+.post{
+    display:flex;
+    font-size: 50px;
+    justify-content: center;
+    background-color: #D6D6D6;
+    width: 500px;
+    flex-wrap: wrap;
+    height: 90vh;
+    align-content: center;
+}
+
+.buttonBox{
+    position: fixed;
+bottom: 15px;
+right: 15px;
+}
+
+
+.fa-plus-square{
+    font-size: 50px;
+}
+
+@media (min-width: 769px) {
+
+    .post{
+    width: 1000px;
+}
+
+.fa-plus-square{
+    font-size: 50px;
+    position: fixed;
+    margin-left: 51vh;
+    margin-top: -0.3vh;
+}
+
+}

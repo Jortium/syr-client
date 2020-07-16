@@ -1,0 +1,61 @@
+.navBar{
+background-color:#ADADAD;
+height: 5vh;
+width: 100%;
+}
+
+.navContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.navList{
+    display: flex;
+    flex-direction: row;
+}
+
+.navBrandM{
+    display: inline-block;
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: 2vh;
+}
+
+.navBrandD{
+    display: none;
+}
+
+.navLinkM{
+ display: inline-block;
+ margin-top:1.5vh;
+ margin-right:2vh;
+}
+
+.navLinkD{
+    display: none;
+}
+
+@media (min-width: 769px) {
+
+    .navBrandM{
+        display: none;
+    }
+
+    .navBrandD{
+        display: inline-block;
+        position: absolute;
+        margin-top: 1vh;
+        margin-left: 2vh;
+    }
+
+.navLinkM{
+    display: none;
+}
+
+.navLinkD{
+    display: inline-block;
+    margin-top:1.5vh;
+    margin-right:2vh;
+}
+}
