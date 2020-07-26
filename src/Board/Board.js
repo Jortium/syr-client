@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Board.css';
 
-export default class Board extends Component {
-    render(){
+const Board = props => {
+    const { boardInfo } = props
         return (
 <div className='main'>
-<br></br>
-    <div className='move'>
-        <p className='post'>
-        Posts go here
-        </p>
-        </div>
+    <ul>
+    {props.boardInfo.staticTest.length > 0 && props.boardInfo.staticTest.map(data =>
+    <li className={data.id}>
+        {data.cpumanufacturer} {data.cpumodel}, {data.cpucores} Cores, {data.gpumanufacturer} {data.gpumodel}, {data.ram}GBs
+    </li>
+    )}
+    </ul>
 </div>
+
         )
     }
-}
+
+export default Board

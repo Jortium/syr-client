@@ -5,8 +5,8 @@ export default class TopNav extends Component {
   render(){
     return (
         <nav className="navBar">
-        <h1 className="navBrandM"><i class="fas fa-memory"></i></h1>
-        <h1 className="navBrandD"><i class="fas fa-memory"></i> Share Your Rig</h1>
+        <h1 className="navBrandM"><i className="fas fa-memory"></i></h1>
+        <h1 className="navBrandD"><i className="fas fa-memory"></i> Share Your Rig</h1>
         <div className="navContainer">
         <i className="far fa-plus-square squareM"></i>
             <ul className="navList">
