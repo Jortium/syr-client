@@ -1,23 +1,20 @@
-.move{
+.main{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
 }
 
-.post{
-    display:flex;
-    font-size: 50px;
-    justify-content: center;
-    background-color: #D6D6D6;
-    width: 500px;
-    flex-wrap: wrap;
-    height: 90vh;
-    align-content: center;
+.column{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
 }
 
 @media (min-width: 769px) {
 
-    .post{
-    width: 1000px;
-}
 
 }

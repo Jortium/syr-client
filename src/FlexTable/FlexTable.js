@@ -7,11 +7,9 @@ const FlexTable = () => {
     return(
     <div>
         <div className='table-container'>
-            <div className='flex-row'>CPU</div>
-            <div className='flex-row'>GPU</div>
-            <div className='flex-row'>RAM</div>
             <Board boardInfo={systemInfo}/>
         </div>
+
     </div>
     )
 };
