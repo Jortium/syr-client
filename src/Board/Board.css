@@ -2,16 +2,28 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-items: center;
+    justify-content: center;
 }
 
 .column{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 2em;
+    border: none;
+    background-color: #D98E04;
+    border-radius: 20%;
+}
+
+.column{
+    width: 400px;
+    height: 90px;
     display: flex;
-    width: 100%;
-    align-items: center;
-    justify-items: center;
+    flex-direction: column;
+}
+
+.part1{
+    display: flex;
+    align-self: flex-end;
 }
 
 @media (min-width: 769px) {

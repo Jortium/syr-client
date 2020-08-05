@@ -1,0 +1,13 @@
+.newPost{
+    font-size: 20px;
+    display: flex;
+    flex-flow: column;
+}
+
+.dropDown{
+    font-size: 20px;
+}
+
+.textbox{
+    font-size: 30px;
+}
