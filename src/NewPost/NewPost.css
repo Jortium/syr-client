@@ -2,12 +2,38 @@
     font-size: 20px;
     display: flex;
     flex-flow: column;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;    
+
 }
 
 .dropDown{
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 50px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
-.textbox{
-    font-size: 30px;
+.textBox{
+    font-size: 25px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    width: 300px;
+    height: 50px;
+}
+
+.postButton{
+    width: 300px;
+    height: 50px;
+    background-color: #A67E05;
+    color: white;
+    margin-top: 1em;
+}
+
+.cpuLabel{
+    margin-top: 1em;
 }

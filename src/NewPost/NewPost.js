@@ -1,21 +1,37 @@
 import React, { useContext, useState } from 'react';
 import './NewPost.css';
 import ApiContext from '../ApiContext';
+import {
+    SubmitErrorMessage,
+    CpuManufacturerErrorMessage,
+    CpuModelErrorMessage,
+    CpuCoresErrorMessage,
+    GpuManufacturerErrorMessage,
+    GpuModelErrorMessage,
+    RamErrorMessage,
+} from '../FormErrors/FormErrors';
 
-const NewPost = () => {
+const NewPost = (props) => {
     const [formValues, setInputValue] = useState({
         cpuManufacturer: '',
         cpuModel: '',
         cpuCores: '',
         gpuManufacturer: '',
         gpuModel: '',
-        RAM: '',
+        ram: '',
+        cpuManufacturerError: '',
+        cpuModelError: '',
+        cpuCoresError: '',
+        gpuManufacturerError: '',
+        gpuModelError: '',
+        ramError: '',
+        submitError: false,
     });
 
-    const CPU_MANUFACTURERS = ['Intel', 'AMD'];
-    const CPU_CORES = [2, 4, 6, 8, 12];
-    const GPU_MANUFACTURER = ['Nvidia', 'AMD'];
-    const RAM = [4, 6, 8, 10, 12, 14, 16, 32];
+    const CPU_MANUFACTURERS = ['...', 'Intel', 'AMD'];
+    const CPU_CORES = ['...', 2, 4, 6, 8, 12];
+    const GPU_MANUFACTURER = ['...', 'Nvidia', 'AMD'];
+    const RAM = ['...', 4, 6, 8, 10, 12, 14, 16, 32];
 
     const generatingOptions = useContext(ApiContext);
 
@@ -24,17 +40,100 @@ const NewPost = () => {
     };
 
     const handleSubmit = () => {
+        
+        const {
+            cpuManufacturerError,
+            cpuModelError,
+            cpuCoresError,
+            gpuManufacturerError,
+            gpuModelError,
+            ramError,
+        } = formValues;
+        if (
+            cpuManufacturerError === '' ||
+            cpuModelError === '' ||
+            cpuCoresError === '' ||
+            gpuManufacturerError === '' ||
+            gpuModelError === '' ||
+            ramError === ''
+        ) {
+            setInputValue({
+                ...formValues,
+                submitError: true,
+            });
+            return;
+        }
+        setInputValue({
+            ...formValues,
+            submitError: false,
+        });
         generatingOptions.postRig(formValues);
+        props.history.push('/');
+    };
+
+    const validateInput = (name, value) => {
+        switch (name) {
+            case 'cpuManufacturer':
+                if (value === '...') {
+                    return true;
+                }
+                break;
+            case 'cpuModel':
+                if (value.length <= 3) {
+                    return true;
+                }
+                break;
+            case 'cpuCores':
+                if (value === '...') {
+                    return true;
+                }
+                break;
+            case 'gpuManufacturer':
+                if (value === '...') {
+                    return true;
+                }
+                break;
+            case 'gpuModel':
+                if (value.length <= 3) {
+                    return true;
+                }
+                break;
+            case 'ram':
+                if (value === '...') {
+                    return true;
+                }
+                break;
+            default:
+                return false;
+        }
     };
 
     const handleValueChange = (e) => {
         const { name, value } = e.target;
-        setInputValue({ ...formValues, [name]: value });
+        const error = validateInput(name, value);
+        if (!error) {
+            setInputValue({
+                ...formValues,
+                [name]: value,
+                [`${name}Error`]: null,
+            });
+            return;
+        }
+        setInputValue({
+            ...formValues,
+            [name]: value,
+            [`${name}Error`]: error,
+        });
     };
 
     return (
         <div className="newPost">
             <h2>Share Your Specifications</h2>
+            <div className="cpuLabel"> 
+                <label htmlFor="cpuManufacturer">CPU Manufacter</label>
+                <CpuManufacturerErrorMessage error={formValues.cpuManufacturerError}
+                />
+            </div>
             <select
                 className="dropDown"
                 name="cpuManufacturer"
@@ -43,13 +142,20 @@ const NewPost = () => {
                 {createDropdown(CPU_MANUFACTURERS)}
             </select>
             <div>
-                <label htmlFor="cpuModel">CPU Model</label>
+                <div>
+                    <label htmlFor="cpuModel">CPU Model</label>
+                    <CpuModelErrorMessage error={formValues.cpuModelError}/>
+                </div>
                 <input
                     type="text"
-                    className="textbox"
+                    className="textBox"
                     name="cpuModel"
                     onChange={handleValueChange}
                 />
+            </div>
+            <div>
+                <label htmlFor="cpuModel">CPU Cores</label>
+                <CpuCoresErrorMessage error={formValues.cpuCoresError}/>
             </div>
             <select
                 className="dropDown"
@@ -58,6 +164,10 @@ const NewPost = () => {
             >
                 {createDropdown(CPU_CORES)}
             </select>
+            <div>
+                <label htmlFor="gpuManufacturer">GPU Manufacter</label>
+                <GpuManufacturerErrorMessage error={formValues.gpuManufacturerError} />
+            </div>
             <select
                 className="dropDown"
                 name="gpuManufacturer"
@@ -67,21 +177,29 @@ const NewPost = () => {
             </select>
             <div>
                 <label htmlFor="gpuModel">GPU Model</label>
-                <input
-                    type="text"
-                    className="textbox"
-                    name="gpuModel"
-                    onChange={handleValueChange}
-                />
+                <GpuModelErrorMessage error={formValues.gpuModelError} />
+            </div>
+            <input
+                type="text"
+                className="textBox"
+                name="gpuModel"
+                onChange={handleValueChange}
+            />
+            <div>
+                <label htmlFor="gpuModel">RAM</label>
+                <RamErrorMessage error={formValues.ramError} />
             </div>
             <select
                 className="dropDown"
-                name="RAM"
+                name="ram"
                 onChange={handleValueChange}
             >
                 {createDropdown(RAM)}
             </select>
-            <button onClick={handleSubmit}>POST</button>
+            <SubmitErrorMessage error={formValues.submitError} />
+            <button onClick={handleSubmit} className="postButton">
+                POST
+            </button>
         </div>
     );
 };

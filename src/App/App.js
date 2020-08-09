@@ -76,7 +76,8 @@ export default class App extends Component{
             // ram: this.state.ram,
             postRig: this.handlePostRig
         }
-        return(
+
+    return(
     <ApiContext.Provider value={value}>
     <TopNav/>
     {this.renderMainRoutes()}
