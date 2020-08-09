@@ -40,7 +40,6 @@ const NewPost = (props) => {
     };
 
     const handleSubmit = () => {
-        
         const {
             cpuManufacturerError,
             cpuModelError,
@@ -129,10 +128,15 @@ const NewPost = (props) => {
     return (
         <div className="newPost">
             <h2>Share Your Specifications</h2>
-            <div className="cpuLabel"> 
-                <label htmlFor="cpuManufacturer">CPU Manufacter</label>
-                <CpuManufacturerErrorMessage error={formValues.cpuManufacturerError}
+            <div className="cpuLabel">
+                <label htmlFor="cpuManufacturer">CPU Manufacter<br /></label>
+            </div>
+            <div>
+                <p>
+                <CpuManufacturerErrorMessage
+                    error={formValues.cpuManufacturerError}  
                 />
+                </p>
             </div>
             <select
                 className="dropDown"
@@ -144,8 +148,13 @@ const NewPost = (props) => {
             <div>
                 <div>
                     <label htmlFor="cpuModel">CPU Model</label>
-                    <CpuModelErrorMessage error={formValues.cpuModelError}/>
                 </div>
+                <div>
+                        <p>
+                        <CpuModelErrorMessage
+                                error={formValues.cpuModelError}/>
+                        </p>
+                    </div>
                 <input
                     type="text"
                     className="textBox"
@@ -155,7 +164,7 @@ const NewPost = (props) => {
             </div>
             <div>
                 <label htmlFor="cpuModel">CPU Cores</label>
-                <CpuCoresErrorMessage error={formValues.cpuCoresError}/>
+                <CpuCoresErrorMessage error={formValues.cpuCoresError} />
             </div>
             <select
                 className="dropDown"
@@ -166,7 +175,9 @@ const NewPost = (props) => {
             </select>
             <div>
                 <label htmlFor="gpuManufacturer">GPU Manufacter</label>
-                <GpuManufacturerErrorMessage error={formValues.gpuManufacturerError} />
+                <GpuManufacturerErrorMessage
+                    error={formValues.gpuManufacturerError}
+                />
             </div>
             <select
                 className="dropDown"
