@@ -12,11 +12,11 @@ const Board = (props) => {
                 <i className="fas fa-share-square"> </i>
               </div>
               <div className="part2">
-                {data.cpuManufacturer} {data.cpuModel} {data.cpuCores}
+                {data.cpumanufacturer} {data.cpumodel} {data.cpucores}
                 core processor
               </div>
               <div className="part3">
-                {data.gpuManufacturer} {data.gpuModel} {data.ram}
+                {data.gpumanufacturer} {data.gpumodel} {data.ram}
                 GBs of RAM
               </div>
             </div>

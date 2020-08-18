@@ -14,6 +14,7 @@ const Contact = () => {
           <a
             href="https://www.linkedin.com/in/joshua-ortiz-188745184/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src="images/linkedin.png"
@@ -23,7 +24,10 @@ const Contact = () => {
           </a>
         </li>
         <li>
-          <a href="https://github.com/OrtizJosh" target="_blank">
+          <a 
+          href="https://github.com/OrtizJosh" 
+          target="_blank"
+          rel="noopener noreferrer">
             <img
               src="images/github.png"
               class="contactInfo"

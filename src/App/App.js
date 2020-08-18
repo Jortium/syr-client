@@ -9,6 +9,7 @@ import About from '../About/About';
 import ApiContext from '../ApiContext';
 import {staticData} from '../staticData';
 import NewPost from '../NewPost/NewPost';
+import Splash from '../Splash/Splash';
 
 export default class App extends Component{
 
@@ -27,12 +28,11 @@ export default class App extends Component{
     }
 
     async componentDidMount () {
-      console.log(process.env.API_KEY)
+      console.log(config.API_KEY)
       const opts = {
         headers: {
-          'content-type': 'application/json',
-          // Authorization: `Bearer 76f26a9c-886f-4ec7-806e-62f79f3016e0`
-          Authorization: `Bearer 76f26a9c-886f-4ec7-806e-62f79f3016e0`
+            'content-type': 'application/json',
+          Authorization: `Bearer ${config.API_KEY}`
         }
       }
       try {
@@ -70,7 +70,7 @@ export default class App extends Component{
             <Route
             exact
               path='/'
-              component={FlexTable}
+              component={Splash}
             />
             <Route
             exact
@@ -86,6 +86,11 @@ export default class App extends Component{
             exact
               path='/post'
               component={NewPost}
+            />
+                        <Route
+            exact
+              path='/board'
+              component={FlexTable}
             />
           </>
         )
