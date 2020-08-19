@@ -1,0 +1,24 @@
+.landingText{
+position: absolute;
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+align-content: center;
+justify-content: center;
+top: 40%;
+width: 25rem;
+text-align: center;
+}
+
+.landingContact{
+margin-top:10rem;
+}
+
+
+@media (min-width: 769px) {
+
+    .landingText{
+    width: 50vw;
+    left: 50vh;
+    }
+}

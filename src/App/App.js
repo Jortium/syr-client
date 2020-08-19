@@ -4,13 +4,11 @@ import { Route } from 'react-router-dom';
 import { config } from '../config';
 import TopNav from '../TopNav/TopNav';
 import FlexTable from '../FlexTable/FlexTable';
-import Contact from '../Contact/Contact';
-import About from '../About/About';
+import Landing from '../Landing/Landing';
+import NewPost from '../NewPost/NewPost';
+import TopNav from '../TopNav/TopNav';
 import ApiContext from '../ApiContext';
 import {staticData} from '../staticData';
-import NewPost from '../NewPost/NewPost';
-import Splash from '../Splash/Splash';
-
 export default class App extends Component{
 
     state = {
@@ -70,17 +68,12 @@ export default class App extends Component{
             <Route
             exact
               path='/'
-              component={Splash}
+              component={Landing}
             />
             <Route
             exact
-              path='/contact'
-              component={Contact}
-            />
-            <Route
-            exact
-              path='/about'
-              component={About}
+              path='/board'
+              component={FlexTable}
             />
             <Route
             exact

@@ -1,8 +1,9 @@
 .main{
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    height: 100vh;
 }
 
 .column{
@@ -12,11 +13,8 @@
     border: none;
     background-color: #D98E04;
     border-radius: 20%;
-}
-
-.column{
-    width: 400px;
-    height: 90px;
+    width: 20rem;
+    height: 5rem;
     display: flex;
     flex-direction: column;
 }
