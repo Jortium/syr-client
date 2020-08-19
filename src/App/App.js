@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import TopNav from '../TopNav/TopNav';
-import FlexTable from '../FlexTable/FlexTable';
 import Contact from '../Contact/Contact';
-import About from '../About/About';
+import FlexTable from '../FlexTable/FlexTable';
+import Landing from '../Landing/Landing';
+import NewPost from '../NewPost/NewPost';
+import TopNav from '../TopNav/TopNav';
 import ApiContext from '../ApiContext';
 import {staticData} from '../staticData';
-import NewPost from '../NewPost/NewPost';
 
 export default class App extends Component{
 
@@ -44,17 +44,12 @@ export default class App extends Component{
             <Route
             exact
               path='/'
+              component={Landing}
+            />
+            <Route
+            exact
+              path='/board'
               component={FlexTable}
-            />
-            <Route
-            exact
-              path='/contact'
-              component={Contact}
-            />
-            <Route
-            exact
-              path='/about'
-              component={About}
             />
             <Route
             exact
