@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './NewPost.css';
-import ApiContext from '../ApiContext';
+import apiContext from '../apiContext';
 import {
     SubmitErrorMessage,
     CpuManufacturerErrorMessage,
@@ -33,7 +33,7 @@ const NewPost = (props) => {
     const GPU_MANUFACTURER = ['...', 'Nvidia', 'AMD'];
     const RAM = ['...', 4, 6, 8, 10, 12, 14, 16, 32];
 
-    const generatingOptions = useContext(ApiContext);
+    const generatingOptions = useContext(apiContext);
 
     const createDropdown = (values) => {
         return values.map((value) => <option>{value}</option>);

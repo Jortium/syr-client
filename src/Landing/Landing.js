@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Landing.css';
 
 const Landing = () => {
@@ -14,7 +14,11 @@ return(
         <p>"Change is the essential process of all existence.”</p>
       <ul class="contactList">
         <li>
-          <a href="mailto:joshwortiz@gmail.com" target="_top">
+          <a 
+          href="mailto:joshwortiz@gmail.com" 
+          target="_top"
+          rel="noopener noreferrer"
+          >
             <img src="images/email.png" class="contactInfo" alt="Email Icon" />
           </a>
         </li>
@@ -22,6 +26,7 @@ return(
           <a
             href="https://www.linkedin.com/in/joshua-ortiz-188745184/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src="images/linkedin.png"
@@ -31,11 +36,15 @@ return(
           </a>
         </li>
         <li>
-          <a href="https://github.com/OrtizJosh" target="_blank">
+          <a 
+          href="https://github.com/OrtizJosh" 
+          target="_blank"
+          rel="noopener noreferrer">
             <img
               src="images/github.png"
               class="contactInfo"
               alt="GitHub Icon"
+              
             />
           </a>
         </li>
