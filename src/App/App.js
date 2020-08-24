@@ -1,111 +1,57 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import { config } from '../config';
-import TopNav from '../TopNav/TopNav';
 import FlexTable from '../FlexTable/FlexTable';
 import Landing from '../Landing/Landing';
 import NewPost from '../NewPost/NewPost';
 import TopNav from '../TopNav/TopNav';
-import ApiContext from '../ApiContext';
-import {staticData} from '../staticData';
-export default class App extends Component{
+import apicontext from '../apicontext';
+import { getAllRigs } from '../api';
 
+export default class App extends Component {
     state = {
-        staticTest:[],
-        cpumanufacturer:[],
-        cpumodel:[],
-        cpucores:[],
-        gpumanufacturer:[],
-        gpumodel:[],
-        ram:[],
+        pcParts: [],
     };
 
-    getData () {
-        return staticData;
-    }
-
-    async componentDidMount () {
-      console.log(config.API_KEY)
-      const opts = {
-        headers: {
-            'content-type': 'application/json',
-          Authorization: `Bearer ${config.API_KEY}`
+    async componentDidMount() {
+        const parts = await getAllRigs();
+        if (parts.body.status === 'FAILURE') {
+            console.log('Error communicating with server')
+            return;
         }
-      }
-      try {
-        const parts = await fetch('http://localhost:8000/api/parts', opts)
-        const partsJson = await parts.json()
-        console.log(partsJson)
+        console.log(parts);
         this.setState({
-          staticTest: partsJson
-        })
-      } catch (e) {
-        console.log('Error communicating with API ', e.message)
-      }
-
-        // setTimeout(() => {
-        //     const staticTest = this.getData()
-        //     this.setState({
-        //         staticTest
-        //     })
-        // }, 1000);
+            pcParts: parts.body.data,
+        });
     }
 
-    handlePostRig = formValues => {
+    handlePostRig = (formValues) => {
         this.setState({
-            staticTest: [
-            ...this.state.staticTest,
-            formValues
-            ]
-        })
-        console.log('!!!!!!!!!!!!!!!!!!!!', formValues)
-    }
+            pcParts: [...this.state.pcParts, formValues],
+        });
+    };
 
     renderMainRoutes() {
         return (
-          <>
-            <Route
-            exact
-              path='/'
-              component={Landing}
-            />
-            <Route
-            exact
-              path='/board'
-              component={FlexTable}
-            />
-            <Route
-            exact
-              path='/post'
-              component={NewPost}
-            />
-                        <Route
-            exact
-              path='/board'
-              component={FlexTable}
-            />
-          </>
-        )
-      }
+            <>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/board" component={FlexTable} />
+                <Route exact path="/post" component={NewPost} />
+            </>
+        );
+    }
 
-    render() { 
+    render() {
         const value = {
-            staticTest: this.state.staticTest,
-            // cpumanufacturer: this.state.cpumanufacturer,
-            // cpumodel: this.state.cpumodel,
-            // cpucores: this.state.cpucores,
-            // gpumanufacturer: this.state.gpumanufacturer,
-            // gpumodel: this.state.gpumodel,
-            // ram: this.state.ram,
-            postRig: this.handlePostRig
-        }
+            pcParts: this.state.pcParts,
+            postRig: this.handlePostRig,
+        };
 
-    return(
-    <ApiContext.Provider value={value}>
-    <TopNav/>
-    {this.renderMainRoutes()}
-    </ApiContext.Provider>
-);
-}
+        return (
+            <apicontext.Provider value={value}>
+                <TopNav />
+                {this.renderMainRoutes()}
+            </apicontext.Provider>
+        );
+    }
 }

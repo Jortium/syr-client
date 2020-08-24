@@ -39,7 +39,8 @@ const NewPost = (props) => {
         return values.map((value) => <option>{value}</option>);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = e => {
+        e.preventDefault()
         const {
             cpuManufacturerError,
             cpuModelError,
