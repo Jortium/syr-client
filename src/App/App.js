@@ -5,7 +5,7 @@ import Board from '../Board/Board';
 import Landing from '../Landing/Landing';
 import NewPost from '../NewPost/NewPost';
 import TopNav from '../TopNav/TopNav';
-import apicontext from '../apiContext';
+import ApiContext from '../ApiContext';
 import { getAllRigs } from '../api';
 
 export default class App extends Component {
@@ -48,10 +48,10 @@ export default class App extends Component {
         };
 
         return (
-            <apicontext.Provider value={value}>
+            <ApiContext.Provider value={value}>
                 <TopNav />
                 {this.renderMainRoutes()}
-            </apicontext.Provider>
+            </ApiContext.Provider>
         );
     }
 }
