@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import './NewPost.css';
-import ApiContext from '../ApiContext';
+import apiContext from '../apiContext';
+import { powerOnSelfTest } from '../api';
+import { validateInput } from './ValidateInput/ValidateInput';
 import {
     SubmitErrorMessage,
     CpuManufacturerErrorMessage,
@@ -9,22 +11,22 @@ import {
     GpuManufacturerErrorMessage,
     GpuModelErrorMessage,
     RamErrorMessage,
-} from '../FormErrors/FormErrors';
+} from './FormErrors/FormErrors';
 
 const NewPost = (props) => {
     const [formValues, setInputValue] = useState({
-        cpuManufacturer: '',
-        cpuModel: '',
-        cpuCores: '',
-        gpuManufacturer: '',
-        gpuModel: '',
+        cpumanufacturer: '',
+        cpumodel: '',
+        cpucores: '',
+        gpumanufacturer: '',
+        gpumodel: '',
         ram: '',
-        cpuManufacturerError: '',
-        cpuModelError: '',
-        cpuCoresError: '',
-        gpuManufacturerError: '',
-        gpuModelError: '',
-        ramError: '',
+        cpumanufacturerError: '',
+        cpumodelError: '',
+        cpucoresError: '',
+        gpumanufacturerError: '',
+        gpumodelError: '',
+        ramerror: '',
         submitError: false,
     });
 
@@ -33,14 +35,16 @@ const NewPost = (props) => {
     const GPU_MANUFACTURER = ['...', 'Nvidia', 'AMD'];
     const RAM = ['...', 4, 6, 8, 10, 12, 14, 16, 32];
 
-    const generatingOptions = useContext(ApiContext);
+    const generatingOptions = useContext(apiContext);
 
     const createDropdown = (values) => {
-        return values.map((value) => <option>{value}</option>);
+        return values.map((value, i) => (
+            <option key={`post${i + 1}`}>{value}</option>
+        ));
     };
 
-    const handleSubmit = e => {
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         const {
             cpuManufacturerError,
             cpuModelError,
@@ -48,6 +52,12 @@ const NewPost = (props) => {
             gpuManufacturerError,
             gpuModelError,
             ramError,
+            cpucores,
+            cpumanufacturer,
+            cpumodel,
+            gpumanufacturer,
+            gpumodel,
+            ram,
         } = formValues;
         if (
             cpuManufacturerError === '' ||
@@ -67,45 +77,21 @@ const NewPost = (props) => {
             ...formValues,
             submitError: false,
         });
-        generatingOptions.postRig(formValues);
-        props.history.push('/');
-    };
-
-    const validateInput = (name, value) => {
-        switch (name) {
-            case 'cpuManufacturer':
-                if (value === '...') {
-                    return true;
-                }
-                break;
-            case 'cpuModel':
-                if (value.length <= 3) {
-                    return true;
-                }
-                break;
-            case 'cpuCores':
-                if (value === '...') {
-                    return true;
-                }
-                break;
-            case 'gpuManufacturer':
-                if (value === '...') {
-                    return true;
-                }
-                break;
-            case 'gpuModel':
-                if (value.length <= 3) {
-                    return true;
-                }
-                break;
-            case 'ram':
-                if (value === '...') {
-                    return true;
-                }
-                break;
-            default:
-                return false;
+        const newRig = {
+            cpucores,
+            cpumanufacturer,
+            cpumodel,
+            gpumanufacturer,
+            gpumodel,
+            ram,
+        };
+        const response = await powerOnSelfTest(newRig);
+        if (response.status === 'FAILURE') {
+            console.log('Error posting to server');
+            return;
         }
+        generatingOptions.postRig(formValues);
+        props.history.push('/board');
     };
 
     const handleValueChange = (e) => {
@@ -130,75 +116,79 @@ const NewPost = (props) => {
         <div className="newPost">
             <h2>Share Your Specifications</h2>
             <div className="cpuLabel">
-                <label htmlFor="cpuManufacturer">CPU Manufacter<br /></label>
+                <label htmlFor="cpumanufacturer">
+                    CPU Manufacter
+                    <br />
+                </label>
             </div>
             <div>
                 <p>
-                <CpuManufacturerErrorMessage
-                    error={formValues.cpuManufacturerError}  
-                />
+                    <CpuManufacturerErrorMessage
+                        error={formValues.cpuManufacturerError}
+                    />
                 </p>
             </div>
             <select
                 className="dropDown"
-                name="cpuManufacturer"
+                name="cpumanufacturer"
                 onChange={handleValueChange}
             >
                 {createDropdown(CPU_MANUFACTURERS)}
             </select>
             <div>
                 <div>
-                    <label htmlFor="cpuModel">CPU Model</label>
+                    <label htmlFor="cpumodel">CPU Model</label>
                 </div>
                 <div>
-                        <p>
+                    <p>
                         <CpuModelErrorMessage
-                                error={formValues.cpuModelError}/>
-                        </p>
-                    </div>
+                            error={formValues.cpuModelError}
+                        />
+                    </p>
+                </div>
                 <input
                     type="text"
                     className="textBox"
-                    name="cpuModel"
+                    name="cpumodel"
                     onChange={handleValueChange}
                 />
             </div>
             <div>
-                <label htmlFor="cpuModel">CPU Cores</label>
+                <label htmlFor="cpumodel">CPU Cores</label>
                 <CpuCoresErrorMessage error={formValues.cpuCoresError} />
             </div>
             <select
                 className="dropDown"
-                name="cpuCores"
+                name="cpucores"
                 onChange={handleValueChange}
             >
                 {createDropdown(CPU_CORES)}
             </select>
             <div>
-                <label htmlFor="gpuManufacturer">GPU Manufacter</label>
+                <label htmlFor="gpumanufacturer">GPU Manufacter</label>
                 <GpuManufacturerErrorMessage
                     error={formValues.gpuManufacturerError}
                 />
             </div>
             <select
                 className="dropDown"
-                name="gpuManufacturer"
+                name="gpumanufacturer"
                 onChange={handleValueChange}
             >
                 {createDropdown(GPU_MANUFACTURER)}
             </select>
             <div>
-                <label htmlFor="gpuModel">GPU Model</label>
+                <label htmlFor="gpumodel">GPU Model</label>
                 <GpuModelErrorMessage error={formValues.gpuModelError} />
             </div>
             <input
                 type="text"
                 className="textBox"
-                name="gpuModel"
+                name="gpumodel"
                 onChange={handleValueChange}
             />
             <div>
-                <label htmlFor="gpuModel">RAM</label>
+                <label htmlFor="gpumodel">RAM</label>
                 <RamErrorMessage error={formValues.ramError} />
             </div>
             <select

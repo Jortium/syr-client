@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import FlexTable from '../FlexTable/FlexTable';
+import Board from '../Board/Board';
 import Landing from '../Landing/Landing';
 import NewPost from '../NewPost/NewPost';
 import TopNav from '../TopNav/TopNav';
-import apicontext from '../apicontext';
+import apicontext from '../apiContext';
 import { getAllRigs } from '../api';
 
 export default class App extends Component {
+
     state = {
         pcParts: [],
     };
@@ -19,7 +20,6 @@ export default class App extends Component {
             console.log('Error communicating with server')
             return;
         }
-        console.log(parts);
         this.setState({
             pcParts: parts.body.data,
         });
@@ -35,7 +35,7 @@ export default class App extends Component {
         return (
             <>
                 <Route exact path="/" component={Landing} />
-                <Route exact path="/board" component={FlexTable} />
+                <Route exact path="/board" component={Board} />
                 <Route exact path="/post" component={NewPost} />
             </>
         );
