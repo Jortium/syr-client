@@ -8,7 +8,7 @@ const Board = () => {
 
   return (
     <div>
-      <FlexTable boardInfo={systemInfo} />
+      <FlexTable tableInfo={systemInfo} />
     </div>
   );
 };

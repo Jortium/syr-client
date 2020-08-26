@@ -5,31 +5,29 @@ import Board from '../Board/Board';
 import Landing from '../Landing/Landing';
 import NewPost from '../NewPost/NewPost';
 import TopNav from '../TopNav/TopNav';
-import apiContext from '../apiContext';
-import { staticData } from '../staticData';
+import apicontext from '../apiContext';
+import { getAllRigs } from '../api';
 
 export default class App extends Component {
 
     state = {
-        staticTest: [],
+        pcParts: [],
     };
 
-    getData() {
-        return staticData;
-    }
-
-    componentDidMount() {
-        setTimeout(() => {
-            const staticTest = this.getData();
-            this.setState({
-                staticTest,
-            });
-        }, 1000);
+    async componentDidMount() {
+        const parts = await getAllRigs();
+        if (parts.body.status === 'FAILURE') {
+            console.log('Error communicating with server')
+            return;
+        }
+        this.setState({
+            pcParts: parts.body.data,
+        });
     }
 
     handlePostRig = (formValues) => {
         this.setState({
-            staticTest: [...this.state.staticTest, formValues],
+            pcParts: [...this.state.pcParts, formValues],
         });
     };
 
@@ -45,15 +43,15 @@ export default class App extends Component {
 
     render() {
         const value = {
-            staticTest: this.state.staticTest,
-            postRig: this.handlePostRig
+            pcParts: this.state.pcParts,
+            postRig: this.handlePostRig,
         };
 
         return (
-            <apiContext.Provider value={value}>
+            <apicontext.Provider value={value}>
                 <TopNav />
                 {this.renderMainRoutes()}
-            </apiContext.Provider>
+            </apicontext.Provider>
         );
     }
 }

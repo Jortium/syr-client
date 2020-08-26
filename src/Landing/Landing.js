@@ -12,14 +12,10 @@ return(
     <div>
         <p className="landingContact"><i className="fas fa-hand-spock"></i> By Joshua Ortiz</p>
         <p>"Change is the essential process of all existence.”</p>
-      <ul class="contactList">
+      <ul className="contactList">
         <li>
-          <a 
-          href="mailto:joshwortiz@gmail.com" 
-          target="_top"
-          rel="noopener noreferrer"
-          >
-            <img src="images/email.png" class="contactInfo" alt="Email Icon" />
+          <a href="mailto:joshwortiz@gmail.com" target="_top">
+            <img src="images/email.png" className="contactInfo" alt="Email Icon" />
           </a>
         </li>
         <li>
@@ -30,19 +26,16 @@ return(
           >
             <img
               src="images/linkedin.png"
-              class="contactInfo"
+              className="contactInfo"
               alt="LinkedIn Icon"
             />
           </a>
         </li>
         <li>
-          <a 
-          href="https://github.com/OrtizJosh" 
-          target="_blank"
-          rel="noopener noreferrer">
+          <a href="https://github.com/OrtizJosh" target="_blank" rel="noopener noreferrer">
             <img
               src="images/github.png"
-              class="contactInfo"
+              className="contactInfo"
               alt="GitHub Icon"
               
             />
