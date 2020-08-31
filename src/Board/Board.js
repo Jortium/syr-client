@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import FlexTable from "../FlexTable/FlexTable";
-import apiContext from "../apiContext";
+import ApiContext from "../ApiContext";
 
 const Board = () => {
 
-  const systemInfo = useContext(apiContext);
+  const systemInfo = useContext(ApiContext);
 
   return (
     <div>

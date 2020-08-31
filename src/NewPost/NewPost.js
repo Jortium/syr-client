@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './NewPost.css';
-import apiContext from '../apiContext';
+import ApiContext from '../ApiContext';
 import { powerOnSelfTest } from '../api';
 import { validateInput } from './ValidateInput/ValidateInput';
 import {
@@ -35,7 +35,7 @@ const NewPost = (props) => {
     const GPU_MANUFACTURER = ['...', 'Nvidia', 'AMD'];
     const RAM = ['...', 4, 6, 8, 10, 12, 14, 16, 32];
 
-    const generatingOptions = useContext(apiContext);
+    const generatingOptions = useContext(ApiContext);
 
     const createDropdown = (values) => {
         return values.map((value, i) => (
